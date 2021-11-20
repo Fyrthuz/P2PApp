@@ -6,6 +6,7 @@
 package gui;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,22 +25,24 @@ public class VPrincipal extends javax.swing.JFrame {
     public VPrincipal(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa,String id) {
         initComponents();
         this.TNombre.setText("Hola: " + id);
-        actualizar_ventanaConectados();
-        actualizar_ventanaDesconectados();
         BChat.setEnabled(false);
         this.fa = fa;
         this.id = id;
-        
     }
     
-    private void actualizar_ventanaConectados() {
+    public void actualizar_ventanaConectados(ArrayList<aplicacion.Usuario> amigos) {
         ModeloTablaConectados m = (ModeloTablaConectados) tablaconectados.getModel();
-        //m.setFilas(this.acciones);
+        ArrayList<String> aux = new ArrayList();
+        
+        for(aplicacion.Usuario user : amigos){
+            aux.add(user.getId());
+        }
+        m.setFilas(aux);
     }
     
-    private void actualizar_ventanaDesconectados() {
+    public void actualizar_ventanaDesconectados(ArrayList<String> desconectados) {
         ModeloTablaDesconectados m = (ModeloTablaDesconectados) tabladesconectados.getModel();
-        //m.setFilas(this.acciones);
+        m.setFilas(desconectados);
     }
     
     /**

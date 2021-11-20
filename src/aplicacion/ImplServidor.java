@@ -5,6 +5,8 @@
  */
 package aplicacion;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -34,13 +36,40 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
             return false;
         }
         this.usuarios.add(usuario);
+        ArrayList<Usuario> notifica = new ArrayList();
+        ArrayList<String> desconectados = new ArrayList();
+        for(String s : this.fbase.Amigos(nombre, clave)){
+            for(Usuario u : this.usuarios){
+                if(u.getId().equals(s)){
+                    notifica.add(u);
+                }else{
+                    desconectados.add(s);
+                }
+            }
+        }
+        for(Usuario s : notifica){
+            s.getInterfaz().NotificaConexionAmigo(usuario.getInterfaz(),usuario.getId(),s.getId());
+        }
+        usuario.getInterfaz().definirDesconectados(desconectados);
         return fbase.LogIn(nombre, clave);
     }
+    
     
     @Override
     public boolean LogOut(InterfazUsuario user,String nombre) throws RemoteException{
         Usuario user2 = new Usuario(nombre,user);
         this.usuarios.remove(user2);
+        ArrayList<Usuario> notifica = new ArrayList();
+        for(String s : this.fbase.Amigos(nombre, "CLAVE")){
+            for(Usuario u : this.usuarios){
+                if(u.getId().equals(s)){
+                    notifica.add(u);
+                }
+            }
+        }
+        for(Usuario s : notifica){
+            s.getInterfaz().NotificaDesconexionAmigo(user2.getInterfaz(),user2.getId());
+        }
         return true;
     }
     
