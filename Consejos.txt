@@ -1,0 +1,15 @@
+Requisitos de estabilidad y robustez de la app:
+	-LogIn(Referencia,nombre,password)
+
+Como en el ejemplo anterior hay que evitar que la referencia pasada al server tenga
+procedimientos como getNombre, getPassword para evitar posibles fallas de seguridad
+de Ingenieria Inversa.
+
+Cuando se hace LogIn el cliente manda una referencia remota al server y el server
+notifica a sus amigos de que te has conectado enviando también la referencia remota
+
+Un mensaje se manda a un solo amigo.
+
+TABLA USUARIOS
+TABLA AMISTADES
+TABLA SOLICITUDESAMISTAD
