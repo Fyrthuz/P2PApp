@@ -7,6 +7,7 @@ package aplicacion;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,8 @@ import java.rmi.RemoteException;
 public interface InterfazUsuario extends Remote{
     
     public void RecibeMensajes(String mensaje) throws RemoteException;
-    public void NotificaConexionAmigo(Usuario amigo) throws RemoteException;
-    public void NotificaDesconexionAmigo(Usuario amigo) throws RemoteException;
+    public void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfId) throws RemoteException;
+    public void NotificaDesconexionAmigo(InterfazUsuario amigo,String id) throws RemoteException;
+    public void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException;
+    public void definirDesconectados(ArrayList<String> desconectados) throws RemoteException;
 }

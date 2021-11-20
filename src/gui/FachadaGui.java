@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author Diego
@@ -18,6 +20,14 @@ public class FachadaGui {
     
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
+    }
+
+    public VPrincipal getVp() {
+        return vp;
+    }
+
+    public void setVp(VPrincipal vp) {
+        this.vp = vp;
     }
     
     public void iniciaVista() {
@@ -39,6 +49,8 @@ public class FachadaGui {
         vp = new VPrincipal(vp, true, fa, nombre);
         vp.setLocationRelativeTo(null);
         vp.setVisible(true);
+        vp.actualizar_ventanaConectados(this.fa.getUser().getAmigos());
+        vp.actualizar_ventanaDesconectados(this.fa.getUser().getDesconectados());
     }
     
     public void mostrarVEditar(String id){

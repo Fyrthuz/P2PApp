@@ -22,6 +22,7 @@ public class Cliente {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
         ImplUsuario user = new ImplUsuario();
         FachadaAplicacion app = new FachadaAplicacion(user);
+        user.fa= app;
         app.fgui.iniciaVista();
     }
     
