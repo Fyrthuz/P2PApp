@@ -30,7 +30,7 @@ public class ModeloTablaConectados extends AbstractTableModel{
 
         switch (col) {
             case 0:
-                nombre = "Id usuario";
+                nombre = "Conectados";
                 break;
         }
         return nombre;

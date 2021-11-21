@@ -18,6 +18,9 @@ public interface InterfazUsuario extends Remote{
     public void RecibeMensajes(String mensaje) throws RemoteException;
     public void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfId) throws RemoteException;
     public void NotificaDesconexionAmigo(InterfazUsuario amigo,String id) throws RemoteException;
+    public void NotificaSolicitudAmigo(InterfazUsuario amigo,String id) throws RemoteException;
     public void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException;
     public void definirDesconectados(ArrayList<String> desconectados) throws RemoteException;
+    public void NotificaSolicitudAmigoUnaCon (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException;
+    public ArrayList<String> getSa() throws RemoteException;
 }

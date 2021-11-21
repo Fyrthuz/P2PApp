@@ -45,12 +45,13 @@ public class FachadaGui {
         vr.setVisible(true);
     }
     
-    public void mostrarVprincipal(String nombre){
+    public void mostrarVprincipal(String nombre) throws RemoteException{
         vp = new VPrincipal(vp, true, fa, nombre);
         vp.setLocationRelativeTo(null);
         vp.setVisible(true);
         vp.actualizar_ventanaConectados(this.fa.getUser().getAmigos());
         vp.actualizar_ventanaDesconectados(this.fa.getUser().getDesconectados());
+        vp.actualizar_ventanaSolicitudAmistad(this.fa.getUser().getSa());
     }
     
     public void mostrarVEditar(String id){

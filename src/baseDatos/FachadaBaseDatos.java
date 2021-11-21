@@ -58,11 +58,23 @@ public class FachadaBaseDatos {
         return this.DAOUsuarios.Registro(id, clave);
     }
     
-    public ArrayList<String> Amigos (String id, String clave){
+    public ArrayList<String> Amigos (String id){
         return this.DAOUsuarios.Amigos(id);
     }
     
     public boolean Editar(String id, String clave){
         return this.DAOUsuarios.modificarUsuario(id, clave);
+    }
+    
+    public ArrayList<String> SolicitarAmigos(String id){
+        return this.DAOUsuarios.SolicitarAmigos(id);
+    }
+    
+    public ArrayList<String> EliminaSolicitudAmigo(String id, String amigo) {
+        return this.DAOUsuarios.EliminaSolicitudAmigo(id, amigo);
+    }
+    
+    public boolean AceptarSolicitudAmistad(String id, String amigo) {
+        return this.DAOUsuarios.AceptarSolicitudAmistad(id, amigo);
     }
 }

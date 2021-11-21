@@ -11,10 +11,10 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Diego
  */
-public class ModeloTablaDesconectados extends AbstractTableModel{
+public class ModeloTablaAmistad extends AbstractTableModel{
     private java.util.List<String> usuarios;
 
-    public ModeloTablaDesconectados() {
+    public ModeloTablaAmistad() {
         this.usuarios = new java.util.ArrayList<String>();
     }
 
@@ -31,7 +31,7 @@ public class ModeloTablaDesconectados extends AbstractTableModel{
 
         switch (col) {
             case 0:
-                nombre = "Desconectados";
+                nombre = "Solicitud amistad";
                 break;
         }
         return nombre;
@@ -68,7 +68,7 @@ public class ModeloTablaDesconectados extends AbstractTableModel{
         fireTableDataChanged();
     }
 
-    public String obtenerUsuarios(int i) {
+    public String obtenerAmistades(int i) {
         return this.usuarios.get(i);
     }
 }

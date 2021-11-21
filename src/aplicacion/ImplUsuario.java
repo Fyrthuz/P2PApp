@@ -20,12 +20,14 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     
     private ArrayList<Usuario> amigos;
     private ArrayList<String> desconectados;
+    private ArrayList<String> sa;
     FachadaAplicacion fa;
     
     public ImplUsuario() throws RemoteException {
         super();
         this.amigos = new ArrayList();
         this.desconectados = new ArrayList();
+        this.sa = new ArrayList();
     }
     
     @Override
@@ -106,4 +108,20 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         }
     }
     
+    @Override
+    public void NotificaSolicitudAmigo(InterfazUsuario amigo, String id) throws RemoteException{
+        this.sa.add(id);
+    }
+    
+    @Override
+    public void NotificaSolicitudAmigoUnaCon(InterfazUsuario amigo, ArrayList<String> id) throws RemoteException{
+        this.sa.clear();
+        this.sa = id;
+        this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
+    }
+    
+    @Override
+    public ArrayList<String> getSa() throws RemoteException{
+        return sa;
+    }
 }

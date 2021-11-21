@@ -26,6 +26,8 @@ public class VPrincipal extends javax.swing.JFrame {
         initComponents();
         this.TNombre.setText("Hola: " + id);
         BChat.setEnabled(false);
+        BAceptar.setEnabled(false);
+        BRechazar.setEnabled(false);
         this.fa = fa;
         this.id = id;
     }
@@ -45,6 +47,11 @@ public class VPrincipal extends javax.swing.JFrame {
         m.setFilas(desconectados);
     }
     
+    public void actualizar_ventanaSolicitudAmistad(ArrayList<String> sa) {
+        ModeloTablaAmistad m = (ModeloTablaAmistad) tablasolicitudes.getModel();
+        m.setFilas(sa);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +69,11 @@ public class VPrincipal extends javax.swing.JFrame {
         BEditarperf = new javax.swing.JButton();
         BSalir = new javax.swing.JButton();
         BChat = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablasolicitudes = new javax.swing.JTable();
+        BAceptar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        BRechazar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,46 +112,89 @@ public class VPrincipal extends javax.swing.JFrame {
         BChat.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         BChat.setText("Chatear");
 
+        tablasolicitudes.setModel(new ModeloTablaAmistad());
+        tablasolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablasolicitudesMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablasolicitudes);
+
+        BAceptar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        BAceptar.setText("Aceptar");
+        BAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAceptarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setText("Solicitar Amistad");
+
+        BRechazar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        BRechazar.setText("Rechazar");
+        BRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BRechazarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 634, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(BChat)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(BRechazar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                        .addComponent(BAceptar))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(BSalir))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BEditarperf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TNombre)
-                        .addGap(160, 160, 160)
-                        .addComponent(BEditarperf))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BChat)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BSalir)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TNombre)
-                    .addComponent(BEditarperf))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BChat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                    .addComponent(BEditarperf)
+                    .addComponent(TNombre))
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BChat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BAceptar)
+                    .addComponent(BRechazar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BSalir)
-                        .addGap(17, 17, 17))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(BSalir))
+                        .addGap(8, 8, 8)))
+                .addContainerGap())
         );
 
         pack();
@@ -165,14 +220,45 @@ public class VPrincipal extends javax.swing.JFrame {
         BChat.setEnabled(true);
     }//GEN-LAST:event_tablaconectadosMouseClicked
 
+    private void tablasolicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablasolicitudesMouseClicked
+        // TODO add your handling code here:
+        BAceptar.setEnabled(true);
+        BRechazar.setEnabled(true);
+    }//GEN-LAST:event_tablasolicitudesMouseClicked
+
+    private void BAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAceptarActionPerformed
+        // TODO add your handling code here:
+        ModeloTablaAmistad m = (ModeloTablaAmistad) tablasolicitudes.getModel();
+        try {
+            this.fa.getServer().AnadirAmigo(this.fa.getUser(), id, m.obtenerAmistades(tablasolicitudes.getSelectedRow()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BAceptarActionPerformed
+
+    private void BRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRechazarActionPerformed
+        // TODO add your handling code here:
+        ModeloTablaAmistad m = (ModeloTablaAmistad) tablasolicitudes.getModel();
+        try {
+            this.fa.getServer().EliminarAmigo(this.fa.getUser(), id, m.obtenerAmistades(tablasolicitudes.getSelectedRow()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BRechazarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BAceptar;
     private javax.swing.JButton BChat;
     private javax.swing.JButton BEditarperf;
+    private javax.swing.JButton BRechazar;
     private javax.swing.JButton BSalir;
     private javax.swing.JLabel TNombre;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaconectados;
     private javax.swing.JTable tabladesconectados;
+    private javax.swing.JTable tablasolicitudes;
     // End of variables declaration//GEN-END:variables
 }
