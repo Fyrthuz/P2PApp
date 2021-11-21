@@ -21,7 +21,8 @@ public interface InterfazServidor extends Remote{
     public boolean  Registrarse(InterfazUsuario user,String nombre,String clave) throws RemoteException;
     
     public boolean  Editar(String id,String clave) throws RemoteException;
-    //LogIn
-    //LogOut
-    //Registrarse
+    
+    public void  EliminarAmigo(InterfazUsuario user, String id,String amigo) throws RemoteException;
+    
+    public boolean  AnadirAmigo(InterfazUsuario user, String id,String amigo) throws RemoteException;
 }

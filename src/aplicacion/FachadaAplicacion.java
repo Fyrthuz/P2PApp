@@ -5,6 +5,8 @@
  */
 package aplicacion;
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author Diego
@@ -35,7 +37,7 @@ public class FachadaAplicacion {
     public void mostrarRegistro(InterfazServidor server){
         fgui.mostrarRegistro(server);
     }
-    public void mostrarVprincipal(String nombre){
+    public void mostrarVprincipal(String nombre) throws RemoteException{
         fgui.mostrarVprincipal(nombre);
     }
     
