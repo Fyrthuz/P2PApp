@@ -93,7 +93,37 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
     }
 
     @Override
-    public boolean AnadirAmigo(InterfazUsuario user, String id, String amigo) throws RemoteException {
-        return this.fbase.AceptarSolicitudAmistad(id, amigo);
+    public void AnadirAmigo(InterfazUsuario user, String id, String amigo) throws RemoteException {
+        user.NotificaSolicitudAmigoUnaCon(user, this.fbase.AceptarSolicitudAmistad(id, amigo));
+        int controlador=0;
+        for(Usuario s: usuarios){
+            if (s.getId().equals(amigo)){
+                controlador=1;
+                user.NotificaConexionAmigo(user, amigo, id);
+                s.getInterfaz().NotificaConexionAmigo(user, id, s.getId());
+            }
+        }
+        //Si el usuario no está conectado lo metemos en desconectados
+        if (controlador==1){
+            
+        }
+    }
+    
+    @Override
+    public void  VerUsuariosDesconocidos(InterfazUsuario user, String id, String nombre) throws RemoteException{
+        user.NotificaAmigosDesconocidos(user, this.fbase.buscarUsuario(id, nombre));
+    }
+    
+    @Override
+    public void enviarpeti(InterfazUsuario user, String id, String amigo) throws RemoteException{
+        if (this.fbase.NuevaSolicitudAmistad(id, amigo)){
+            for(Usuario s: usuarios){
+                if (s.getId().equals(amigo)){
+                    s.getInterfaz().AnadirSolicitudAmistad(user, id);
+                }
+            }
+        } else {
+            System.out.println("Error a la hora de enviar peti");
+        }
     }
 }

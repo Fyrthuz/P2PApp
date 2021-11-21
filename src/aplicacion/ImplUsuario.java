@@ -99,4 +99,15 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     public ArrayList<String> getSa() throws RemoteException{
         return sa;
     }
+    
+    @Override
+    public void NotificaAmigosDesconocidos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
+        System.out.println(id);
+        this.fa.fgui.getVv().actualizaventana(id);
+    }
+    
+    public void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException{
+        this.sa.add(id);
+        this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
+    }
 }

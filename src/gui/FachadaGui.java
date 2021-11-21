@@ -17,6 +17,7 @@ public class FachadaGui {
     VAutentificacion va;
     VRegistro vr;
     VEditar ve;
+    VVerusuarios vv;
     
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
@@ -26,6 +27,10 @@ public class FachadaGui {
         return vp;
     }
 
+    public VVerusuarios getVv() {
+        return vv;
+    }
+    
     public void setVp(VPrincipal vp) {
         this.vp = vp;
     }
@@ -59,5 +64,11 @@ public class FachadaGui {
         ve.setLocationRelativeTo(null);
         ve.setVisible(true);
     } 
+    
+    public void mostrarVVusuarios(String id){
+        this.vv = new VVerusuarios(this.vp, true, fa, id);
+        vv.setLocationRelativeTo(null);
+        vv.setVisible(true);
+    }
 
 }

@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/baseDatos/DaoUsuarios.java</file>
             <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/ImplUsuario.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/gui/VPrincipal.java</file>
+            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/InterfazUsuario.java</file>
+            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/InterfazServidor.java</file>
             <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/baseDatos/FachadaBaseDatos.java</file>
             <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/ImplServidor.java</file>
+            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/gui/VVerusuarios.java</file>
         </group>
     </open-files>
 </project-private>
