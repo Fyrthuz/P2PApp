@@ -123,11 +123,11 @@ public class DaoUsuarios extends AbstractDAO{
         PreparedStatement stmUsuario = null;
         ResultSet rsAmigos;
         String aux;
-
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=?");
+            stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and aceptado=?");
             stmUsuario.setString(1, id);
+            stmUsuario.setBoolean(2, true);
             rsAmigos = stmUsuario.executeQuery();
             
             if (rsAmigos.next()) {
@@ -135,8 +135,9 @@ public class DaoUsuarios extends AbstractDAO{
                 ret.add(aux);
             }
             
-            stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=?");
+            stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and aceptado=?");
             stmUsuario.setString(1, id);
+            stmUsuario.setBoolean(2, true);
             rsAmigos = stmUsuario.executeQuery();
             
             if (rsAmigos.next()) {
