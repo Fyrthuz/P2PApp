@@ -31,7 +31,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     
     @Override
     public void RecibeMensajes(String mensaje){
-    
+        this.fa.fgui.getVp().actualizarChat(mensaje);
     }
     
     @Override
