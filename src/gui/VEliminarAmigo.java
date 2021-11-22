@@ -14,27 +14,27 @@ import java.util.logging.Logger;
  *
  * @author Diego
  */
-public class VVerusuarios extends javax.swing.JDialog {
+public class VEliminarAmigo extends javax.swing.JDialog {
+
     aplicacion.FachadaAplicacion fa;
     String id;
-    
+
     /**
-     * Creates new form VVerusuarios
+     * Creates new form VEliminarAmigo
      */
-    public VVerusuarios(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa,String id) {
+    public VEliminarAmigo(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, String id) {
         super(parent, modal);
         initComponents();
+        this.fa = fa;
+        this.id = id;
         Benviar.setEnabled(false);
-        this.fa=fa;
-        this.id=id;
     }
-    
     
     public void actualizaventana(ArrayList<String> usuarios){
-        ModeloTablaUsuarios m = (ModeloTablaUsuarios) tablausuarios.getModel();
+        ModeloTablaAmigos m = (ModeloTablaAmigos) tablaamigos.getModel();
         m.setFilas(usuarios);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,24 +44,21 @@ public class VVerusuarios extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablausuarios = new javax.swing.JTable();
-        UsuarioBuscar = new javax.swing.JTextField();
-        Bbuscar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Bbuscar = new javax.swing.JButton();
+        UsuarioBuscar = new javax.swing.JTextField();
         BVolver = new javax.swing.JButton();
         Benviar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaamigos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tablausuarios.setModel(new ModeloTablaUsuarios());
-        tablausuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablausuariosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tablausuarios);
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setText("Eliminar amigo");
+
+        jLabel1.setText("Id usuario:");
 
         Bbuscar.setText("Buscar");
         Bbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,11 +66,6 @@ public class VVerusuarios extends javax.swing.JDialog {
                 BbuscarActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Id usuario:");
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Enviar solicitud de amistad");
 
         BVolver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         BVolver.setText("Volver");
@@ -84,63 +76,76 @@ public class VVerusuarios extends javax.swing.JDialog {
         });
 
         Benviar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        Benviar.setText("Enviar");
+        Benviar.setText("Eliminar");
         Benviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BenviarActionPerformed(evt);
             }
         });
 
+        tablaamigos.setModel(new ModeloTablaAmigos());
+        tablaamigos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaamigosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaamigos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BVolver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Benviar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(UsuarioBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Bbuscar)
-                                    .addGap(0, 13, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(BVolver)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Benviar))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(UsuarioBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addComponent(Bbuscar))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
                     .addComponent(UsuarioBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Bbuscar)
-                    .addComponent(jLabel1))
+                    .addComponent(Bbuscar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BVolver)
-                    .addComponent(Benviar))
-                .addGap(36, 36, 36))
+                    .addComponent(Benviar)
+                    .addComponent(BVolver))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuscarActionPerformed
+
+        try {
+            // TODO add your handling code here:
+            this.fa.getServer().VerAmigo(this.fa.getUser(), id, UsuarioBuscar.getText());
+        } catch (RemoteException ex) {
+            Logger.getLogger(VEliminarAmigo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BbuscarActionPerformed
 
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
@@ -149,30 +154,19 @@ public class VVerusuarios extends javax.swing.JDialog {
 
     private void BenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BenviarActionPerformed
         // TODO add your handling code here:
-        ModeloTablaUsuarios m = (ModeloTablaUsuarios) tablausuarios.getModel();
+        ModeloTablaAmigos m = (ModeloTablaAmigos) tablaamigos.getModel();
         try {
-            this.fa.getServer().enviarpeti(this.fa.getUser(), this.id, m.obtenerUsuarios(tablausuarios.getSelectedRow()));
-            this.dispose();
+            this.fa.getServer().EliminarAmistad(this.id, m.obtenerAmistades(tablaamigos.getSelectedRow()));
         } catch (RemoteException ex) {
-            Logger.getLogger(VVerusuarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VEliminarAmigo.class.getName()).log(Level.SEVERE, null, ex);
         }
+            this.dispose();
     }//GEN-LAST:event_BenviarActionPerformed
 
-    private void tablausuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablausuariosMouseClicked
+    private void tablaamigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaamigosMouseClicked
         // TODO add your handling code here:
         Benviar.setEnabled(true);
-    }//GEN-LAST:event_tablausuariosMouseClicked
-
-    private void BbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuscarActionPerformed
-        try {
-            // TODO add your handling code here:
-            this.fa.getServer().VerUsuariosDesconocidos(this.fa.getUser(), id, UsuarioBuscar.getText());
-        } catch (RemoteException ex) {
-            Logger.getLogger(VVerusuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BbuscarActionPerformed
-
-
+    }//GEN-LAST:event_tablaamigosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BVolver;
@@ -182,6 +176,6 @@ public class VVerusuarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablausuarios;
+    private javax.swing.JTable tablaamigos;
     // End of variables declaration//GEN-END:variables
 }

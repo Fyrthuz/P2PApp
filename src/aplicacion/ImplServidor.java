@@ -45,12 +45,15 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
                 }
             }
         }
-        for (Usuario s : notifica) {
-            s.getInterfaz().NotificaConexionAmigo(usuario.getInterfaz(), usuario.getId(), s.getId());
-        }
 
         usuario.getInterfaz().definirDesconectados(desconectados);
 
+        
+        for (Usuario s : notifica) {
+            s.getInterfaz().NotificaConexionAmigo(usuario.getInterfaz(), usuario.getId(), s.getId());
+        }
+        
+        
         for (String sa : this.fbase.SolicitarAmigos(nombre)) {
             user.NotificaSolicitudAmigo(user, sa);
         }
@@ -130,7 +133,6 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
     @Override
     public void EliminarAmistad (String id,String eliminado) throws RemoteException{
         this.fbase.EliminarAmista(id, eliminado);
-        
         for(Usuario user : this.usuarios){
             if(user.getId().equals(id)){
                 user.getInterfaz().eliminarAmistades(eliminado);
@@ -138,6 +140,11 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
                 user.getInterfaz().eliminarAmistades(id);
             }
         }
-    
+    }
+
+    @Override
+    public void  VerAmigo(InterfazUsuario user, String id, String amigo) throws RemoteException{
+        System.out.println(this.fbase.VerAmigos(id, amigo));
+        user.NotificaAmigos(user, this.fbase.VerAmigos(id, amigo));
     }
 }
