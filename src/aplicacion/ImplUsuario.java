@@ -30,12 +30,12 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
     
     @Override
-    public void RecibeMensajes(String mensaje){
+    public synchronized void RecibeMensajes(String mensaje){
         this.fa.fgui.getVp().actualizarChat(mensaje);
     }
     
     @Override
-    public void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfid) throws RemoteException{
+    public synchronized void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfid) throws RemoteException{
         this.amigos.add(new Usuario(id,amigo));
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         //this.desconectados=this.getDesconectados();
@@ -47,7 +47,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
     
     @Override
-    public void NotificaDesconexionAmigo(InterfazUsuario amigo,String id){
+    public synchronized void NotificaDesconexionAmigo(InterfazUsuario amigo,String id){
         this.amigos.remove(new Usuario(id,amigo));
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         this.desconectados.add(id);
@@ -59,7 +59,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
 
     
    @Override
-    public void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException{
+    public synchronized void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException{
         if(!this.amigos.contains(new Usuario(id,amigo))){
             this.amigos.add(new Usuario(id,amigo));
             this.desconectados.remove(id);
@@ -67,15 +67,15 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
     
     
-    public ArrayList<Usuario> getAmigos() {
+    public synchronized ArrayList<Usuario> getAmigos() {
         return amigos;
     }
 
-    public void setAmigos(ArrayList<Usuario> amigos) {
+    public synchronized void setAmigos(ArrayList<Usuario> amigos) {
         this.amigos = amigos;
     }
 
-    public ArrayList<String> getDesconectados() {
+    public synchronized ArrayList<String> getDesconectados() {
         int aux = this.amigos.size();
         System.out.println(this.amigos);
         System.out.println(this.desconectados);
@@ -102,7 +102,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
     
     @Override
-    public void definirDesconectados(ArrayList<String> desconectados) throws RemoteException{
+    public synchronized void definirDesconectados(ArrayList<String> desconectados) throws RemoteException{
         Set<String> aux2 = new LinkedHashSet();
         aux2.addAll(desconectados);
         desconectados.clear();
@@ -112,36 +112,36 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     
     
     @Override
-    public void NotificaSolicitudAmigo(InterfazUsuario amigo, String id) throws RemoteException{
+    public synchronized void NotificaSolicitudAmigo(InterfazUsuario amigo, String id) throws RemoteException{
         this.sa.add(id);
     }
     
     @Override
-    public void NotificaSolicitudAmigoUnaCon(InterfazUsuario amigo, ArrayList<String> id) throws RemoteException{
+    public synchronized void NotificaSolicitudAmigoUnaCon(InterfazUsuario amigo, ArrayList<String> id) throws RemoteException{
         this.sa.clear();
         this.sa = id;
         this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
     }
     
     @Override
-    public ArrayList<String> getSa() throws RemoteException{
+    public synchronized ArrayList<String> getSa() throws RemoteException{
         return sa;
     }
     
     @Override
-    public void NotificaAmigosDesconocidos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
+    public synchronized void NotificaAmigosDesconocidos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
         System.out.println(id);
         this.fa.fgui.getVv().actualizaventana(id);
     }
     
     @Override
-    public void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException{
+    public synchronized void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException{
         this.sa.add(id);
         this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
     }
     
     @Override
-    public void eliminarAmistades(String amistad) throws RemoteException{
+    public synchronized void eliminarAmistades(String amistad) throws RemoteException{
         Usuario user = new Usuario(amistad,null);
         this.amigos.remove(user);
         this.desconectados.remove(amistad);
@@ -150,7 +150,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
     
     @Override
-    public void NotificaAmigos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
+    public synchronized void NotificaAmigos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
         this.fa.fgui.getVea().actualizaventana(id);
     }
 }
