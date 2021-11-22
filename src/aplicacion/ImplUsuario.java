@@ -8,6 +8,8 @@ package aplicacion;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -37,8 +39,9 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.amigos.add(new Usuario(id,amigo));
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         this.desconectados.remove(id);
+        this.desconectados=this.getDesconectados();
         this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);
-        amigo.AnadeAmigoALosConectados(this, selfid);
+        amigo.NotificaConexionAmigo(this, selfid,id);
         System.out.println("Se conecto " + id);
         
     }
@@ -48,6 +51,7 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.amigos.remove(new Usuario(id,amigo));
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         this.desconectados.add(id);
+        this.desconectados=this.getDesconectados();
         this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);  
         System.out.println("Se desconecto " + id);
         System.out.println(this.amigos);
@@ -62,17 +66,37 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     }
 
     public ArrayList<String> getDesconectados() {
-        for(int i=0; i < this.amigos.size() ; i++){
+        int aux = this.amigos.size();
+        System.out.println(this.amigos);
+        System.out.println(this.desconectados);
+        for(int i=0; i < aux ; i++){
             if(this.desconectados.contains(this.amigos.get(i).getId())){
-                this.desconectados.remove(i);
+                System.out.println("TIS");
+                if(aux>=2){
+                    this.desconectados.remove(this.amigos.get(i).getId());
+                    aux--;
+                }else{
+                    this.amigos.remove(0);
+                    aux=0;
+                    break;
+                }
                 i--;
             }
         }
+        System.out.println(this.desconectados);
+        Set<String> aux2 = new LinkedHashSet();
+        aux2.addAll(this.desconectados);
+        desconectados.clear();
+        desconectados.addAll(aux2);
         return desconectados;
     }
     
     @Override
     public void definirDesconectados(ArrayList<String> desconectados) throws RemoteException{
+        Set<String> aux2 = new LinkedHashSet();
+        aux2.addAll(desconectados);
+        desconectados.clear();
+        desconectados.addAll(aux2);
         this.desconectados = desconectados;
     }
     
@@ -106,8 +130,18 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.fa.fgui.getVv().actualizaventana(id);
     }
     
+    @Override
     public void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException{
         this.sa.add(id);
         this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
+    }
+    
+    @Override
+    public void eliminarAmistades(String amistad) throws RemoteException{
+        Usuario user = new Usuario(amistad,null);
+        this.amigos.remove(user);
+        this.desconectados.remove(amistad);
+        this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
+        this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);
     }
 }

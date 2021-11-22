@@ -85,4 +85,8 @@ public class FachadaBaseDatos {
     public boolean NuevaSolicitudAmistad(String id, String amigo){
         return this.DAOUsuarios.NuevaSolicitudAmistad(id, amigo);
     }
+    
+    public boolean EliminarAmista(String id,String id2){
+        return this.DAOUsuarios.EliminarAmigo(id, id2);
+    }
 }

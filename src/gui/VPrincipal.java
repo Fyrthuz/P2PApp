@@ -239,6 +239,7 @@ public class VPrincipal extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.actualizar_ventanaDesconectados(this.fa.getUser().getDesconectados());
     }//GEN-LAST:event_BAceptarActionPerformed
 
     private void BRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRechazarActionPerformed
