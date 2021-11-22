@@ -372,6 +372,8 @@ public class VPrincipal extends javax.swing.JFrame {
         this.Mensajes.setVisible(true);
         this.BEnviar.setVisible(true);
         
+        this.Chat.selectAll();
+        this.Chat.replaceSelection("");
         this.chat=m.obtenerUsuarios(tablaconectados.getSelectedRow());
         
         
