@@ -81,4 +81,8 @@ public class FachadaGui {
         vea.setLocationRelativeTo(null);
         vea.setVisible(true);
     }
+    
+    public void añadeMensaje(String mensaje){
+        this.vp.actualizarChat(mensaje);
+    }
 }

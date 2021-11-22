@@ -19,6 +19,7 @@ public class VPrincipal extends javax.swing.JFrame {
     
     private aplicacion.FachadaAplicacion fa;
     private String id;
+    private String chat;
     /**
      * Creates new form VPrincipal
      */
@@ -30,6 +31,12 @@ public class VPrincipal extends javax.swing.JFrame {
         BRechazar.setEnabled(false);
         this.fa = fa;
         this.id = id;
+        this.BEnviar.setEnabled(false);
+        this.BChat.setEnabled(false);
+        
+        this.Chat.setVisible(false);
+        this.Mensajes.setVisible(false);
+        this.BEnviar.setVisible(false);
     }
     
     public void actualizar_ventanaConectados(ArrayList<aplicacion.Usuario> amigos) {
@@ -75,6 +82,11 @@ public class VPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         BRechazar = new javax.swing.JButton();
         EliminaramigoB = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Chat = new javax.swing.JTextArea();
+        BEnviar = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        Mensajes = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +124,11 @@ public class VPrincipal extends javax.swing.JFrame {
 
         BChat.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         BChat.setText("Chatear");
+        BChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BChatActionPerformed(evt);
+            }
+        });
 
         tablasolicitudes.setModel(new ModeloTablaAmistad());
         tablasolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,6 +170,22 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Chat.setColumns(20);
+        Chat.setRows(5);
+        jScrollPane4.setViewportView(Chat);
+
+        BEnviar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BEnviar.setText("Enviar");
+        BEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BEnviarActionPerformed(evt);
+            }
+        });
+
+        Mensajes.setColumns(20);
+        Mensajes.setRows(5);
+        jScrollPane6.setViewportView(Mensajes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,62 +194,76 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(BChat)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(BRechazar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                                        .addComponent(BAceptar))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 714, Short.MAX_VALUE)
-                        .addComponent(BSalir))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(BChat)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(BRechazar)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                                .addComponent(BAceptar))
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BEditarperf)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TNombre))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(EliminaramigoB)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(TNombre)))
+                        .addGap(18, 18, 18)
+                        .addComponent(BEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(EliminaramigoB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4)))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BEditarperf)
-                    .addComponent(TNombre))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BChat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BAceptar)
-                    .addComponent(BRechazar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(BSalir)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BSalir)
+                                    .addComponent(BEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BEditarperf)
+                            .addComponent(TNombre))
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BChat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BAceptar)
+                            .addComponent(BRechazar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(EliminaramigoB))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -283,18 +330,70 @@ public class VPrincipal extends javax.swing.JFrame {
         this.fa.mostrarVEliminarAmigo(this.id);
     }//GEN-LAST:event_EliminaramigoBActionPerformed
 
+    private void BEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEnviarActionPerformed
+        
+        if(!this.Mensajes.equals("")){
+            this.Chat.append(this.id + ":" + this.Mensajes.getText() + "\n");
+            for(aplicacion.Usuario amigo: this.fa.getUser().getAmigos()){
+                if(amigo.getId().equals(this.chat)){
+                    try {
+                        amigo.getInterfaz().RecibeMensajes(this.id + ":" + this.Mensajes.getText() + "\n");
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.Mensajes.setText("");
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_BEnviarActionPerformed
+
+    
+    public void actualizarChat(String mensaje){
+        this.BEnviar.setEnabled(true);
+        this.BChat.setEnabled(false);
+        this.Mensajes.setEnabled(true);
+        
+        this.Chat.setVisible(true);
+        this.Mensajes.setVisible(true);
+        this.BEnviar.setVisible(true);
+        this.Chat.selectAll();
+        this.Chat.replaceSelection("");
+        this.Chat.append(mensaje);
+    }
+    
+    
+    private void BChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BChatActionPerformed
+        ModeloTablaConectados m = (ModeloTablaConectados) this.tablaconectados.getModel();        
+        this.BEnviar.setEnabled(true);
+        this.BChat.setEnabled(false);
+        
+        this.Chat.setVisible(true);
+        this.Mensajes.setVisible(true);
+        this.BEnviar.setVisible(true);
+        
+        this.chat=m.obtenerUsuarios(tablaconectados.getSelectedRow());
+        
+        
+    }//GEN-LAST:event_BChatActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BAceptar;
     private javax.swing.JButton BChat;
     private javax.swing.JButton BEditarperf;
+    private javax.swing.JButton BEnviar;
     private javax.swing.JButton BRechazar;
     private javax.swing.JButton BSalir;
+    private javax.swing.JTextArea Chat;
     private javax.swing.JButton EliminaramigoB;
+    private javax.swing.JTextArea Mensajes;
     private javax.swing.JLabel TNombre;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable tablaconectados;
     private javax.swing.JTable tabladesconectados;
     private javax.swing.JTable tablasolicitudes;
