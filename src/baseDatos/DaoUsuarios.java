@@ -218,19 +218,18 @@ public class DaoUsuarios extends AbstractDAO{
     }
     
     //Aceptación de la solicitud
-    public boolean AceptarSolicitudAmistad(String id, String amigo) {
+    public ArrayList<String> AceptarSolicitudAmistad(String id, String amigo) {
         Connection con;
         PreparedStatement stmUsuario = null;
 
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("update amigos set aceptado=trues where amigo1=? and amigo2=?");
+            stmUsuario = con.prepareStatement("update amigos set aceptado=true where amigo1=? and amigo2=?");
             stmUsuario.setString(1, amigo);
             stmUsuario.setString(2, id);
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
         } finally {
             try {
                 stmUsuario.close();
@@ -238,7 +237,7 @@ public class DaoUsuarios extends AbstractDAO{
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        return true;
+        return SolicitarAmigos(id);
     }
     
     //Aceptación de la solicitud
@@ -255,12 +254,12 @@ public class DaoUsuarios extends AbstractDAO{
             if (rsCodigo.next()){
                 numero = rsCodigo.getInt("codigo");
             }
-            
+            numero+=1;
             //insertamos el usuario
-            stmUsuario = con.prepareStatement("insert into amigos values(?, '?', '?', false)");
-            stmUsuario.setInt(0, numero);
-            stmUsuario.setString(1, id);
-            stmUsuario.setString(2, amigo);
+            stmUsuario = con.prepareStatement("insert into amigos values(?, ?, ?, false)");
+            stmUsuario.setInt(1, numero);
+            stmUsuario.setString(2, id);
+            stmUsuario.setString(3, amigo);
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -273,6 +272,45 @@ public class DaoUsuarios extends AbstractDAO{
             }
         }
         return true;
+    }
+    
+    //Buscamos los usuarios no amigos
+    public ArrayList<String> buscarUsuario(String id, String nombre){
+        ArrayList<String> ret = new ArrayList();
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsAmigos;
+        String aux;
+
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement(  "select idusuarios " +
+                                                "from usuarios " +
+                                                "where idusuarios like ? and idusuarios not in " +
+                                                    "(select distinct(u.idusuarios) " +
+                                                    "from usuarios u, amigos a " +
+                                                    "where (u.idusuarios=a.amigo2 or u.idusuarios=a.amigo1) " +
+                                                    "       and (amigo2=? or  amigo1=?))");
+            stmUsuario.setString(1,"%" + nombre + "%");
+            stmUsuario.setString(2, id);
+            stmUsuario.setString(3, id);
+            rsAmigos = stmUsuario.executeQuery();
+            
+            while (rsAmigos.next()) {
+                aux = rsAmigos.getString("idusuarios");
+                ret.add(aux);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return ret;
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return ret;
     }
  }
     

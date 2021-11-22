@@ -24,5 +24,9 @@ public interface InterfazServidor extends Remote{
     
     public void  EliminarAmigo(InterfazUsuario user, String id,String amigo) throws RemoteException;
     
-    public boolean  AnadirAmigo(InterfazUsuario user, String id,String amigo) throws RemoteException;
+    public void  AnadirAmigo(InterfazUsuario user, String id,String amigo) throws RemoteException;
+    
+    public void  VerUsuariosDesconocidos(InterfazUsuario user, String id, String nombre) throws RemoteException;
+    
+    public void enviarpeti(InterfazUsuario user, String id, String amigo) throws RemoteException;
 }

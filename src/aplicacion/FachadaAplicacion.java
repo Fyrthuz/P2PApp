@@ -44,7 +44,10 @@ public class FachadaAplicacion {
     public void mostrarVEditar(String id){
         fgui.mostrarVEditar(id);
     }
-
+    
+    public void mostrarVVusuarios(String id){
+        fgui.mostrarVVusuarios(id);
+    }
     public ImplUsuario getUser() {
         return user;
     }

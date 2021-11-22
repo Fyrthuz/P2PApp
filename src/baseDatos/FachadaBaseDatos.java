@@ -74,7 +74,15 @@ public class FachadaBaseDatos {
         return this.DAOUsuarios.EliminaSolicitudAmigo(id, amigo);
     }
     
-    public boolean AceptarSolicitudAmistad(String id, String amigo) {
+    public ArrayList<String> AceptarSolicitudAmistad(String id, String amigo) {
         return this.DAOUsuarios.AceptarSolicitudAmistad(id, amigo);
+    }
+    
+    public ArrayList<String> buscarUsuario(String id, String nombre){
+        return this.DAOUsuarios.buscarUsuario(id, nombre);
+    }
+    
+    public boolean NuevaSolicitudAmistad(String id, String amigo){
+        return this.DAOUsuarios.NuevaSolicitudAmistad(id, amigo);
     }
 }
