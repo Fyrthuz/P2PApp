@@ -38,10 +38,10 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     public void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfid) throws RemoteException{
         this.amigos.add(new Usuario(id,amigo));
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
+        //this.desconectados=this.getDesconectados();
         this.desconectados.remove(id);
-        this.desconectados=this.getDesconectados();
         this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);
-        amigo.NotificaConexionAmigo(this, selfid,id);
+        amigo.AnadeAmigoALosConectados(this, selfid);
         System.out.println("Se conecto " + id);
         
     }
@@ -57,6 +57,16 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         System.out.println(this.amigos);
     }
 
+    
+   @Override
+    public void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException{
+        if(!this.amigos.contains(new Usuario(id,amigo))){
+            this.amigos.add(new Usuario(id,amigo));
+            this.desconectados.remove(id);
+        }
+    }
+    
+    
     public ArrayList<Usuario> getAmigos() {
         return amigos;
     }
@@ -100,12 +110,6 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.desconectados = desconectados;
     }
     
-    @Override
-    public void AnadeAmigoALosConectados(InterfazUsuario amigo, String id) throws RemoteException{
-        if(!this.amigos.contains(new Usuario(id,amigo))){
-            this.amigos.add(new Usuario(id,amigo));
-        }
-    }
     
     @Override
     public void NotificaSolicitudAmigo(InterfazUsuario amigo, String id) throws RemoteException{
@@ -143,5 +147,10 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.desconectados.remove(amistad);
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);
+    }
+    
+    @Override
+    public void NotificaAmigos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException{
+        this.fa.fgui.getVea().actualizaventana(id);
     }
 }

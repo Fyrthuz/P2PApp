@@ -48,6 +48,11 @@ public class FachadaAplicacion {
     public void mostrarVVusuarios(String id){
         fgui.mostrarVVusuarios(id);
     }
+    
+    public void mostrarVEliminarAmigo(String id){
+        fgui.mostrarVEliminarAmigo(id);
+    }
+    
     public ImplUsuario getUser() {
         return user;
     }

@@ -82,6 +82,10 @@ public class FachadaBaseDatos {
         return this.DAOUsuarios.buscarUsuario(id, nombre);
     }
     
+    public ArrayList<String> VerAmigos(String id, String amigo){
+        return this.DAOUsuarios.VerAmigos(id, amigo);
+    }
+    
     public boolean NuevaSolicitudAmistad(String id, String amigo){
         return this.DAOUsuarios.NuevaSolicitudAmistad(id, amigo);
     }

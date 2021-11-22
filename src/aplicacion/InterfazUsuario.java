@@ -25,5 +25,6 @@ public interface InterfazUsuario extends Remote{
     public void NotificaSolicitudAmigoUnaCon (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException;
     public void NotificaAmigosDesconocidos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException;
     public void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException;
+    public void NotificaAmigos (InterfazUsuario amigo,ArrayList<String> id) throws RemoteException;
     public ArrayList<String> getSa() throws RemoteException;
 }

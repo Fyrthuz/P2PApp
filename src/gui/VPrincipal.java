@@ -74,6 +74,7 @@ public class VPrincipal extends javax.swing.JFrame {
         BAceptar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         BRechazar = new javax.swing.JButton();
+        EliminaramigoB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,7 +130,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Solicitar Amistad");
+        jButton2.setText("Solicitar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -141,6 +142,14 @@ public class VPrincipal extends javax.swing.JFrame {
         BRechazar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BRechazarActionPerformed(evt);
+            }
+        });
+
+        EliminaramigoB.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        EliminaramigoB.setText("Eliminar Amigo");
+        EliminaramigoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminaramigoBActionPerformed(evt);
             }
         });
 
@@ -163,14 +172,18 @@ public class VPrincipal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                                         .addComponent(BAceptar))
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 714, Short.MAX_VALUE)
                         .addComponent(BSalir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BEditarperf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TNombre)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BEditarperf)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TNombre))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(EliminaramigoB)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(27, 27, 27))
         );
@@ -191,15 +204,19 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BAceptar)
                     .addComponent(BRechazar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(BSalir)
+                        .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
-                            .addComponent(BSalir))
-                        .addGap(8, 8, 8)))
-                .addContainerGap())
+                            .addComponent(EliminaramigoB))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -240,6 +257,8 @@ public class VPrincipal extends javax.swing.JFrame {
             Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.actualizar_ventanaDesconectados(this.fa.getUser().getDesconectados());
+        BAceptar.setEnabled(false);
+        BRechazar.setEnabled(false);
     }//GEN-LAST:event_BAceptarActionPerformed
 
     private void BRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRechazarActionPerformed
@@ -250,6 +269,8 @@ public class VPrincipal extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        BAceptar.setEnabled(false);
+        BRechazar.setEnabled(false);
     }//GEN-LAST:event_BRechazarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -257,12 +278,18 @@ public class VPrincipal extends javax.swing.JFrame {
         this.fa.mostrarVVusuarios(this.id);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void EliminaramigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaramigoBActionPerformed
+        // TODO add your handling code here:
+        this.fa.mostrarVEliminarAmigo(this.id);
+    }//GEN-LAST:event_EliminaramigoBActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BAceptar;
     private javax.swing.JButton BChat;
     private javax.swing.JButton BEditarperf;
     private javax.swing.JButton BRechazar;
     private javax.swing.JButton BSalir;
+    private javax.swing.JButton EliminaramigoB;
     private javax.swing.JLabel TNombre;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -18,6 +18,11 @@ public class FachadaGui {
     VRegistro vr;
     VEditar ve;
     VVerusuarios vv;
+    VEliminarAmigo vea;
+
+    public VEliminarAmigo getVea() {
+        return vea;
+    }
     
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
@@ -70,5 +75,10 @@ public class FachadaGui {
         vv.setLocationRelativeTo(null);
         vv.setVisible(true);
     }
-
+    
+    public void mostrarVEliminarAmigo(String id){
+        this.vea = new VEliminarAmigo(this.vp, true, fa, id);
+        vea.setLocationRelativeTo(null);
+        vea.setVisible(true);
+    }
 }

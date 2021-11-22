@@ -126,10 +126,8 @@ public class DaoUsuarios extends AbstractDAO{
         String aux;
         con = super.getConexion();
         try {
-            stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and aceptado=?");
             stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and aceptado=true");
             stmUsuario.setString(1, id);
-            //stmUsuario.setBoolean(2, true);
             rsAmigos = stmUsuario.executeQuery();
             
             while (rsAmigos.next()) {
@@ -137,10 +135,52 @@ public class DaoUsuarios extends AbstractDAO{
                 ret.add(aux);
             }
           
-            stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and aceptado=?");
             stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and aceptado=true");
             stmUsuario.setString(1, id);
-            //stmUsuario.setBoolean(2, true);
+            rsAmigos = stmUsuario.executeQuery();
+            
+            while (rsAmigos.next()) {
+                aux = rsAmigos.getString("amigo2");
+                ret.add(aux);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return ret;
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return ret;
+    }
+    
+    //Consulta de los amigos que tiene un usuario
+    public ArrayList<String> VerAmigos(String id, String amigo) {
+        
+        ArrayList<String> ret = new ArrayList();
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsAmigos;
+        String aux;
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and amigo1 like ? and aceptado=true");
+            stmUsuario.setString(1, id);
+            stmUsuario.setString(2, "%"+amigo+"%");
+            rsAmigos = stmUsuario.executeQuery();
+            
+            while (rsAmigos.next()) {
+                aux = rsAmigos.getString("amigo1");
+                ret.add(aux);
+            }
+          
+            stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and amigo2 like ? and aceptado=true");
+            stmUsuario.setString(1, id);
+            stmUsuario.setString(2, "%"+amigo+"%");
             rsAmigos = stmUsuario.executeQuery();
             
             while (rsAmigos.next()) {
