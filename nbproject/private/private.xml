@@ -3,26 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/baseDatos/DaoUsuarios.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/Cliente.java</file>
-            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/FachadaGui.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/InterfazServidor.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/Servidor.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/Usuario.java</file>
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/ModeloTablaAmistad.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/ImplServidor.java</file>
-            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/VAutentificacion.java</file>
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/ModeloTablaConectados.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/InterfazUsuario.java</file>
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/ModeloTablaDesconectados.java</file>
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/FachadaGui.java</file>
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/VAutentificacion.java</file>
             <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/aplicacion/ImplUsuario.java</file>
-=======
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/baseDatos/DaoUsuarios.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/ImplUsuario.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/InterfazUsuario.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/InterfazServidor.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/baseDatos/FachadaBaseDatos.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/aplicacion/ImplServidor.java</file>
-            <file>file:/C:/Users/Diego/Desktop/ETSE/CODI/P5/P2PApp/src/gui/VVerusuarios.java</file>
->>>>>>> 96b7d36551fbffd25c16cbf453e383149000c0cf
+            <file>file:/C:/Users/PC/Desktop/3Informatica/1Cuatri/ComputacionDistribuida/Practicas/Practica5/P2PApp/src/gui/VPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

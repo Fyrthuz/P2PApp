@@ -129,7 +129,7 @@ public class DaoUsuarios extends AbstractDAO{
             stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and aceptado=?");
             stmUsuario = con.prepareStatement("select amigo1 from amigos where amigo2=? and aceptado=true");
             stmUsuario.setString(1, id);
-            stmUsuario.setBoolean(2, true);
+            //stmUsuario.setBoolean(2, true);
             rsAmigos = stmUsuario.executeQuery();
             
             while (rsAmigos.next()) {
@@ -140,7 +140,7 @@ public class DaoUsuarios extends AbstractDAO{
             stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and aceptado=?");
             stmUsuario = con.prepareStatement("select amigo2 from amigos where amigo1=? and aceptado=true");
             stmUsuario.setString(1, id);
-            stmUsuario.setBoolean(2, true);
+            //stmUsuario.setBoolean(2, true);
             rsAmigos = stmUsuario.executeQuery();
             
             while (rsAmigos.next()) {
@@ -311,6 +311,37 @@ public class DaoUsuarios extends AbstractDAO{
             }
         }
         return ret;
+    }
+    
+    
+    public boolean EliminarAmigo(String id, String id2){
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("delete from amigos where amigo1=? and amigo2=?");
+            stmUsuario.setString(1, id);
+            stmUsuario.setString(2, id2);
+            stmUsuario.executeUpdate();
+            
+            stmUsuario = con.prepareStatement("delete from amigos where amigo1=? and amigo2=?");
+            stmUsuario.setString(1, id2);
+            stmUsuario.setString(2, id);
+            stmUsuario.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    
+        return true;
     }
  }
     

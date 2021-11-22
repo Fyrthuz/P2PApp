@@ -104,8 +104,8 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
             }
         }
         //Si el usuario no está conectado lo metemos en desconectados
-        if (controlador==1){
-            
+        if (controlador==0){
+            user.definirDesconectados(this.fbase.Amigos(id));
         }
     }
     
@@ -125,5 +125,19 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
         } else {
             System.out.println("Error a la hora de enviar peti");
         }
+    }
+    
+    @Override
+    public void EliminarAmistad (String id,String eliminado) throws RemoteException{
+        this.fbase.EliminarAmista(id, eliminado);
+        
+        for(Usuario user : this.usuarios){
+            if(user.getId().equals(id)){
+                user.getInterfaz().eliminarAmistades(eliminado);
+            }else if(user.getId().equals(eliminado)){
+                user.getInterfaz().eliminarAmistades(id);
+            }
+        }
+    
     }
 }

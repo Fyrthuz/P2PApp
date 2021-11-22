@@ -10,7 +10,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -131,8 +130,18 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
         this.fa.fgui.getVv().actualizaventana(id);
     }
     
+    @Override
     public void AnadirSolicitudAmistad (InterfazUsuario amigo,String id) throws RemoteException{
         this.sa.add(id);
         this.fa.fgui.getVp().actualizar_ventanaSolicitudAmistad(this.sa);
+    }
+    
+    @Override
+    public void eliminarAmistades(String amistad) throws RemoteException{
+        Usuario user = new Usuario(amistad,null);
+        this.amigos.remove(user);
+        this.desconectados.remove(amistad);
+        this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
+        this.fa.fgui.getVp().actualizar_ventanaDesconectados(this.desconectados);
     }
 }
