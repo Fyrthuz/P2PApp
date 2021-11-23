@@ -20,6 +20,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private aplicacion.FachadaAplicacion fa;
     private String id;
     private String chat;
+    private aplicacion.InterfazUsuario usuariochat;
     /**
      * Creates new form VPrincipal
      */
@@ -334,9 +335,10 @@ public class VPrincipal extends javax.swing.JFrame {
         if(!this.Mensajes.equals("")){
             this.Chat.append(this.id + ":" + this.Mensajes.getText() + "\n");
             for(aplicacion.Usuario amigo: this.fa.getUser().getAmigos()){
-                if(amigo.getId().equals(this.chat)){
+                if(amigo.getId().equals(this.chat) || amigo.getInterfaz().equals(this.usuariochat)){
                     try {
-                        amigo.getInterfaz().RecibeMensajes(this.id + ":" + this.Mensajes.getText() + "\n");
+                        this.usuariochat=amigo.getInterfaz();
+                        this.usuariochat.RecibeMensajes(this.fa.getUser(), this.id + ":" + this.Mensajes.getText() + "\n");
                     } catch (RemoteException ex) {
                         Logger.getLogger(VPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -348,17 +350,21 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BEnviarActionPerformed
 
     
-    public void actualizarChat(String mensaje){
-        this.BEnviar.setEnabled(true);
-        this.BChat.setEnabled(false);
-        this.Mensajes.setEnabled(true);
+    public void actualizarChat(aplicacion.InterfazUsuario envia,String mensaje){
         
-        this.Chat.setVisible(true);
-        this.Mensajes.setVisible(true);
-        this.BEnviar.setVisible(true);
-        this.Chat.selectAll();
-        this.Chat.replaceSelection("");
+        if(!envia.equals(this.usuariochat)){
+            this.BEnviar.setEnabled(true);
+            this.BChat.setEnabled(false);
+            this.Mensajes.setEnabled(true);
+
+            this.Chat.setVisible(true);
+            this.Mensajes.setVisible(true);
+            this.BEnviar.setVisible(true);
+            this.Chat.selectAll();
+            this.Chat.replaceSelection("");
+        }
         this.Chat.append(mensaje);
+        this.usuariochat = envia;
     }
     
     
@@ -374,7 +380,12 @@ public class VPrincipal extends javax.swing.JFrame {
         this.Chat.selectAll();
         this.Chat.replaceSelection("");
         this.chat=m.obtenerUsuarios(tablaconectados.getSelectedRow());
-        
+        for(aplicacion.Usuario amigo: this.fa.getUser().getAmigos()){
+            if(amigo.getId().equals(this.chat)){
+                this.usuariochat=amigo.getInterfaz();
+                break;
+            }
+        }
         
     }//GEN-LAST:event_BChatActionPerformed
 

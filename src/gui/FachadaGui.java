@@ -82,7 +82,7 @@ public class FachadaGui {
         vea.setVisible(true);
     }
     
-    public void añadeMensaje(String mensaje){
-        this.vp.actualizarChat(mensaje);
+    public void añadeMensaje(aplicacion.InterfazUsuario envia,String mensaje){
+        this.vp.actualizarChat(envia,mensaje);
     }
 }
