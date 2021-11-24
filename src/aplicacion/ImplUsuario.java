@@ -36,7 +36,9 @@ public class ImplUsuario extends UnicastRemoteObject implements InterfazUsuario{
     
     @Override
     public void NotificaConexionAmigo(InterfazUsuario amigo,String id,String selfid) throws RemoteException{
-        this.amigos.add(new Usuario(id,amigo));
+        if(!this.amigos.contains(new Usuario(id,amigo))){
+            this.amigos.add(new Usuario(id,amigo));
+        }
         this.fa.fgui.getVp().actualizar_ventanaConectados(this.amigos);
         //this.desconectados=this.getDesconectados();
         this.desconectados.remove(id);
