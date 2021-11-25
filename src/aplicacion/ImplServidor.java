@@ -102,7 +102,7 @@ public class ImplServidor extends UnicastRemoteObject implements InterfazServido
         for(Usuario s: usuarios){
             if (s.getId().equals(amigo)){
                 controlador=1;
-                user.NotificaConexionAmigo(user, amigo, id);
+                user.NotificaConexionAmigo(s.getInterfaz(), amigo, id);
                 s.getInterfaz().NotificaConexionAmigo(user, id, s.getId());
             }
         }
